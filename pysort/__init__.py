@@ -4,6 +4,7 @@ from .heap import heap_sort
 from .insertion import insertion_sort
 from .merge import merge_sort
 from .quick import quick_sort
+from .selection import selection_sort
 
 class SortingList(list):
 
@@ -21,3 +22,6 @@ class SortingList(list):
 
     def quick_sort(self):
         return quick_sort(self)
+
+    def selection_sort(self):
+        return selection_sort(self)

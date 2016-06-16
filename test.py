@@ -43,5 +43,11 @@ class SortAlgs(unittest.TestCase):
         list.quick_sort()
         self.assertTrue(is_sorted(list))
 
+    def test_selection(self):
+        list = SortingList(build_list(30))
+        list.selection_sort()
+        self.assertTrue(is_sorted(list))
+
+
 if __name__ == '__main__':
     unittest.main()
