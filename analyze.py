@@ -1,3 +1,6 @@
+"""
+Run analyzes tests for sorting algorithms.
+"""
 
 import random
 import itertools
@@ -14,6 +17,7 @@ TEST_CODITIONS = (
     'RANDOM'
 )
 
+# Test sizes range.
 TEST_SIZES = (
     100,
     500,
@@ -36,12 +40,33 @@ SORT_ALGS = (
 )
 
 def timeit(function):
+    """
+    A time measurement function.
+
+    `timeit` from `timeit` module is too complex for this use.
+
+    @param function: a callable with no args.
+
+    @return: a float in seconds between starts and ends the function.
+    """
+
     start = time.time()
     function()
 
     return time.time() - start
 
 def build_list(size, condition, range=(0, 2e20)):
+    """
+    Builds a list of `size` size and `condition` arrangement.
+
+    @param size: a integer.
+    @param condition: a `TEST_CODITIONS` item.
+    @param range: a tuple with start and end range of the numbers
+        generated.
+
+    @return: a `SortingList` object.
+    """
+
     logging.debug('building a list with %d elements and %s' % (
         size,
         condition.lower()
@@ -60,6 +85,16 @@ def build_list(size, condition, range=(0, 2e20)):
     return SortingList(list)
 
 def run_test(size, condition, sortalg):
+    """
+    Run 3 tests for the `sortalg` and returns the time average.
+
+    @param size: a integer, the list size to test.
+    @param condition: a `TEST_CODITIONS` item.
+    @param sortalg: a string, a `SORT_ALGS` item.
+
+    @return: a average between tree tests time.
+    """
+
     times = []
 
     logging.debug('running tests for %d elements and %s' % (
@@ -77,6 +112,10 @@ def run_test(size, condition, sortalg):
     return result
 
 def run_all_tests():
+    """
+    Run all tests possibilities and saves it to CSV files.
+    """
+
     logging.debug('starting testing')
 
     for alg in SORT_ALGS:

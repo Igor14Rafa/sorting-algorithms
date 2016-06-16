@@ -1,5 +1,13 @@
 
 def siftdown(list, start, end):
+    """
+    Restore a heap.
+
+    @param list: a list object.
+    @param start: a integer, the start index of restoring.
+    @param end: a integer, then end index of restoring.
+    """
+
     root = start
     while True:
         child = root * 2 + 1
@@ -13,10 +21,22 @@ def siftdown(list, start, end):
             break
 
 def heapify(list):
+    """
+    Transforms a list into a maximum heap.
+
+    @param list: a list object.
+    """
+
     for start in range((len(list) - 2) / 2, -1, -1):
         siftdown(list, start, len(list) - 1)
 
 def heap_sort(list):
+    """
+    A heap sort algorithm implemetation
+
+    @param list: a list object.
+    """
+
     heapify(list)
 
     for end in range(len(list) - 1, 0, -1):

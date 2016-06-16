@@ -5,12 +5,28 @@ import random
 from pysort import SortingList
 
 def build_list(size):
+    """
+    Build a list with values from 0 to `size` and shuffle it.
+
+    @param size: a integer with the list size.
+
+    @return: a list object.
+    """
+
     list = range(size)
     random.shuffle(list)
 
     return list
 
 def is_sorted(list):
+    """
+    Return true if the list is sorted.
+
+    @param list: any iterable with `__len__` and `__getitem__` methods.
+
+    @return: a boolean.
+    """
+
     for i in xrange(len(list) - 1):
         if list[i] > list[i+1]:
             return False

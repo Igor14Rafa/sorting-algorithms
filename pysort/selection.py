@@ -1,5 +1,11 @@
 
 def selection_sort (list):
+    """
+    A selection sort algorithm implemetation.
+
+    @param list: a list object.
+    """
+
     list_size = len(list)
 
     for i in range(0, list_size):

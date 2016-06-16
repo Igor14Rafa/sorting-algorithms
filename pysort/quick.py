@@ -1,5 +1,11 @@
 
 def quick_sort(list):
+    """
+    A quick sort algorithm implemetation.
+
+    @param list: a list object.
+    """
+
     if len(list) > 1:
         pivot_index = len(list) // 2
         smaller_list = []

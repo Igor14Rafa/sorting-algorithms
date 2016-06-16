@@ -1,5 +1,14 @@
 
 def merge(left, right):
+    """
+    Merge two lists into a ordered one.
+
+    @param left: a list object.
+    @param right: a list object.
+
+    @return: a list object.
+    """
+
     result = []
     i = j = 0
     while i < len(left) and j < len(right):
@@ -15,7 +24,16 @@ def merge(left, right):
 
 
 def merge_sort(list):
+    """
+    A merge sort algorithm implemetation.
+
+    @param list: a list object.
+
+    @return: a new ordered list.
+    """
+
     if len(list) < 2:
         return list
     m = len(list) / 2
+
     return merge(merge_sort(list[:m]), merge_sort(list[m:]))

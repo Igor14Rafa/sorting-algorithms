@@ -1,5 +1,11 @@
 
 def bubble_sort(list):
+    """
+    A bubble sort algorithm implemetation
+
+    @param list: a list object.
+    """
+
     list_size = len(list)
 
     for i in xrange(list_size):

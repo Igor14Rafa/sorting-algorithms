@@ -1,5 +1,11 @@
 
 def insertion_sort(list):
+    """
+    A insertion sort algorithm implemetation.
+
+    @param list: a list object.
+    """
+
     for i in xrange(1, len(list)):
         key = list[i]
         j = i - 1
