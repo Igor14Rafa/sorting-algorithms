@@ -1,55 +1,30 @@
 import random
 
+from .counter import counter
 
-
-def partition(aList, first, last):
-    
-
+def partition(list, first, last):
     pivot = first + random.randrange(last - first + 1)
-    
-    swap(aList, pivot, last)
-    
-    for i in range(first, last):
-      
-        if aList[i] <= aList[last]:
-        
-            swap(aList, i, first)
-        
-            first += 1
- 
-    
+    swap(list, pivot, last)
 
-    swap(aList, first, last)
-    
+    for i in range(first, last):
+        counter.next()
+        if list[i] <= list[last]:
+            swap(list, i, first)
+            first += 1
+
+    swap(list, first, last)
+
     return first
 
-
-
 def swap(A, x, y):
-
-  
     A[x],A[y]=A[y],A[x]
- 
 
+def quick_sort(list):
+    quicksort(list, 0, len(list) - 1)
 
-def quick_sort(aList):
-
-    
-    _quicksort(aList, 0, len(aList) - 1)
- 
-
-
-def _quicksort(aList, first, last):
-
-    
+def quicksort(list, first, last):
+    counter.next()
     if first < last:
-      
-        pivot = partition(aList, first, last)
-      
-        _quicksort(aList, first, pivot - 1)
-      
-        _quicksort(aList, pivot + 1, last)
- 
- 
- 
- 
+        pivot = partition(list, first, last)
+        quicksort(list, first, pivot - 1)
+        quicksort(list, pivot + 1, last)

@@ -10,6 +10,7 @@ import csv
 import logging
 
 from pysort import SortingList
+from pysort import counter
 
 TEST_CODITIONS = (
     'CRESCENT',
@@ -108,8 +109,9 @@ def run_test(size, condition, sortalg):
         times.append(timeit(getattr(list, sortalg)))
 
     result = sum(times)/3.
+    comps = counter.counter.next()/3.
     logging.debug('result: %.2f s' % result)
-    return result
+    return result, comps
 
 def run_all_tests():
     """
@@ -123,14 +125,16 @@ def run_all_tests():
 
         fp = open(os.path.join('results', '%s.csv' % alg), 'w')
         fd = csv.writer(fp)
-        fd.writerow(('Size', 'Result', 'Condition'))
+        fd.writerow(('Size', 'Time', 'Comps', 'Condition'))
 
         for test_case in itertools.product(TEST_SIZES, TEST_CODITIONS):
             size = test_case[0]
             condition = test_case[1]
 
-            result = run_test(size, condition, alg)
-            fd.writerow((size, result, condition))
+            result, comps = run_test(size, condition, alg)
+            counter.counter.zero()
+            logging.debug('%.2f s and %.2f comps' % (result, comps))
+            fd.writerow((size, result, comps, condition))
 
         fp.close()
 

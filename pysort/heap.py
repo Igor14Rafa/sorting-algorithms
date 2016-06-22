@@ -1,4 +1,6 @@
 
+from .counter import counter
+
 def siftdown(list, start, end):
     """
     Restore a heap.
@@ -11,9 +13,16 @@ def siftdown(list, start, end):
     root = start
     while True:
         child = root * 2 + 1
-        if child > end: break
+
+        counter.next()
+        if child > end:
+            break
+
+        counter.next(); counter.next()
         if child + 1 <= end and list[child] < list[child + 1]:
             child += 1
+
+        counter.next()
         if list[root] < list[child]:
             list[root], list[child] = list[child], list[root]
             root = child
