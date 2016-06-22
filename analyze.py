@@ -8,6 +8,7 @@ import os
 import time
 import csv
 import logging
+from decouple import config
 
 from pysort import SortingList
 from pysort import counter
@@ -18,27 +19,37 @@ TEST_CODITIONS = (
     'RANDOM'
 )
 
-# Test sizes range.
-TEST_SIZES = (
-    100,
-    500,
-    1000,
-    # 5000,
-    # 30000,
-    # 80000,
-    # 100000,
-    # 150000,
-    # 200000
+TEST_SIZES = config(
+    'TEST_SIZES',
+    cast=lambda x: list(map(int, x.split()))
 )
 
-SORT_ALGS = (
-    'bubble_sort',
-    'heap_sort',
-    'insertion_sort',
-    'merge_sort',
-    'quick_sort',
-    'selection_sort'
+# Test sizes range.
+# TEST_SIZES = (
+#     100,
+#     500,
+#     1000,
+#     5000,
+#     30000,
+#     80000,
+#     100000,
+#     150000,
+#     200000
+# )
+
+SORT_ALGS = config(
+    'SORT_ALGS',
+    cast=lambda x: x.split()
 )
+# SORT_ALGS = (
+#     'bubble_sort',
+#     'heap_sort',
+#     'insertion_sort',
+#     'merge_sort',
+#     'quick_sort',
+#     'selection_sort',
+#     'sort'
+# )
 
 def timeit(function):
     """
@@ -139,5 +150,7 @@ def run_all_tests():
         fp.close()
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG)
+    log_level = config('LOG_LEVEL')
+
+    logging.basicConfig(level=getattr(logging, log_level))
     run_all_tests()
