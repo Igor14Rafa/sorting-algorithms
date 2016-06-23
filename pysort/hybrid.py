@@ -2,7 +2,7 @@ from math import *
 from insertion import *
 from quick import *
 
-def hybridsort(list):
+def hybrid_sort(list):
     l = len(list)
     maxdepth = int(log(l,2)) * int(log(l,2))		
     _hybridsort(list, 0, l - 1, maxdepth)
