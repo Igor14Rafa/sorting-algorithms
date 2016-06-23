@@ -5,6 +5,7 @@ from .insertion import insertion_sort
 from .merge import merge_sort
 from .quick import quick_sort
 from .selection import selection_sort
+from .hybrid import hybrid_sort
 
 class SortingList(list):
     """
@@ -52,3 +53,10 @@ class SortingList(list):
         """
 
         return selection_sort(self)
+
+    def hybrid_sort(self):
+        """
+        Sort with a hybrid sort algorithm.
+        """
+
+        return hybrid_sort(self)

@@ -1,7 +1,7 @@
 from math import log
 
 from .insertion import insertion_sort
-from .quick import quick_sort
+from .quick import quick_sort, partition
 
 def hybrid_sort(list):
     """
@@ -20,9 +20,14 @@ def _hybridsort(list, first, last, maxdepth):
     @param last = an integer, final index of list.
     @param maxdepth = an integer, initially indicates the maximum level of recursion, and it's decreased at each level.
     """
+
     if maxdepth == 0:
-        insertion_sort(list)
-	return
+        clist = list[first:last]
+        insertion_sort(clist)
+        for i in range(0, last - first):
+            list[i + first] = clist[i]
+        return
+
     if first < last:
         p = partition(list, first, last)
         _hybridsort(list, first, p - 1, maxdepth - 1)
