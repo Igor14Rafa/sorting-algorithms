@@ -1,5 +1,7 @@
 import random
 
+from . import counter
+
 def partition(aList, first, last):
     """
     Creates two partitions in aList, with the elements at left end being lesses than the pivot, and the rigth end being bigger than the pivot.
@@ -13,6 +15,7 @@ def partition(aList, first, last):
     swap(aList, pivot, last)
 
     for i in range(first, last):
+        counter.counter.next()
         if aList[i] <= aList[last]:
             swap(aList, i, first)
             first += 1
@@ -41,6 +44,7 @@ def _quicksort(aList, first, last):
     @param last = an integer, last index of aList
     """
 
+    counter.counter.next()
     if first < last:
         pivot = partition(aList, first, last)
         _quicksort(aList, first, pivot - 1)

@@ -138,9 +138,8 @@ def run_all_tests():
         fd = csv.writer(fp)
         fd.writerow(('Size', 'Time', 'Comps', 'Condition'))
 
-        for test_case in itertools.product(TEST_SIZES, TEST_CODITIONS):
-            size = test_case[0]
-            condition = test_case[1]
+        for test_case in itertools.product(TEST_CODITIONS, TEST_SIZES):
+            condition, size = test_case
 
             result, comps = run_test(size, condition, alg)
             counter.counter.zero()
