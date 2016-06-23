@@ -63,6 +63,11 @@ class SortAlgs(unittest.TestCase):
         list = SortingList(build_list(30))
         list.selection_sort()
         self.assertTrue(is_sorted(list))
+        
+    def test_hybrid(self):
+        list = SortingList(build_list(30))
+        list.hybrid_sort()
+        self.assertTrue(is_sorted(list))
 
 
 if __name__ == '__main__':
