@@ -8,7 +8,6 @@ def hybrid_sort(list):
     _hybridsort(list, 0, l - 1, maxdepth)
 
 def _hybridsort(list, first, last, maxdepth):
-    n = len(list)
     if maxdepth == 0:
         insertion_sort(list)
 	return
