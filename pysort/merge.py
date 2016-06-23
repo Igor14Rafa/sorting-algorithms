@@ -1,4 +1,6 @@
 
+from .counter import counter
+
 def merge(left, right):
     """
     Merge two lists into a ordered one.
@@ -11,7 +13,10 @@ def merge(left, right):
 
     result = []
     i = j = 0
+
+    counter.next(); counter.next()
     while i < len(left) and j < len(right):
+        counter.next()
         if left[i] < right[j]:
             result.append(left[i])
             i += 1
@@ -32,6 +37,7 @@ def merge_sort(list):
     @return: a new ordered list.
     """
 
+    counter.next()
     if len(list) < 2:
         return list
     m = len(list) / 2

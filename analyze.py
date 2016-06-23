@@ -8,8 +8,10 @@ import os
 import time
 import csv
 import logging
+from decouple import config
 
 from pysort import SortingList
+from pysort import counter
 
 TEST_CODITIONS = (
     'CRESCENT',
@@ -17,28 +19,37 @@ TEST_CODITIONS = (
     'RANDOM'
 )
 
-# Test sizes range.
-TEST_SIZES = (
-    100,
-    500,
-    1000,
-    5000,
-    30000,
-    80000,
-    100000,
-    150000,
-    200000
+TEST_SIZES = config(
+    'TEST_SIZES',
+    cast=lambda x: list(map(int, x.split()))
 )
 
-SORT_ALGS = (
-    'bubble_sort',
-    'heap_sort',
-    'insertion_sort',
-    'merge_sort',
-    'quick_sort',
-    'selection_sort',
-    'hybrid_sort'
+# Test sizes range.
+# TEST_SIZES = (
+#     100,
+#     500,
+#     1000,
+#     5000,
+#     30000,
+#     80000,
+#     100000,
+#     150000,
+#     200000
+# )
+
+SORT_ALGS = config(
+    'SORT_ALGS',
+    cast=lambda x: x.split()
 )
+# SORT_ALGS = (
+#     'bubble_sort',
+#     'heap_sort',
+#     'insertion_sort',
+#     'merge_sort',
+#     'quick_sort',
+#     'selection_sort',
+#     'sort'
+# )
 
 def timeit(function):
     """
@@ -109,8 +120,9 @@ def run_test(size, condition, sortalg):
         times.append(timeit(getattr(list, sortalg)))
 
     result = sum(times)/3.
+    comps = counter.counter.next()/3.
     logging.debug('result: %.2f s' % result)
-    return result
+    return result, comps
 
 def run_all_tests():
     """
@@ -124,17 +136,21 @@ def run_all_tests():
 
         fp = open(os.path.join('results', '%s.csv' % alg), 'w')
         fd = csv.writer(fp)
-        fd.writerow(('Size', 'Result', 'Condition'))
+        fd.writerow(('Size', 'Time', 'Comps', 'Condition'))
 
         for test_case in itertools.product(TEST_SIZES, TEST_CODITIONS):
             size = test_case[0]
             condition = test_case[1]
 
-            result = run_test(size, condition, alg)
-            fd.writerow((size, result, condition))
+            result, comps = run_test(size, condition, alg)
+            counter.counter.zero()
+            logging.debug('%.2f s and %.2f comps' % (result, comps))
+            fd.writerow((size, result, comps, condition))
 
         fp.close()
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG)
+    log_level = config('LOG_LEVEL')
+
+    logging.basicConfig(level=getattr(logging, log_level))
     run_all_tests()
