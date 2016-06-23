@@ -22,12 +22,12 @@ TEST_SIZES = (
     100,
     500,
     1000,
-    # 5000,
-    # 30000,
-    # 80000,
-    # 100000,
-    # 150000,
-    # 200000
+    5000,
+    30000,
+    80000,
+    100000,
+    150000,
+    200000
 )
 
 SORT_ALGS = (
@@ -36,7 +36,8 @@ SORT_ALGS = (
     'insertion_sort',
     'merge_sort',
     'quick_sort',
-    'selection_sort'
+    'selection_sort',
+    'hybrid_sort'
 )
 
 def timeit(function):
